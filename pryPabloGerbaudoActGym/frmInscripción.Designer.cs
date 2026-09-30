@@ -34,16 +34,19 @@
             lblPlanes = new Label();
             lblTurno = new Label();
             lblMeses = new Label();
-            lblCasillero = new Label();
             lblPago = new Label();
             comboBox1 = new ComboBox();
             comboBox2 = new ComboBox();
             comboBox3 = new ComboBox();
             textBox1 = new TextBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
-            label1 = new Label();
+            rbEfectivo = new RadioButton();
+            rbTarjeta = new RadioButton();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            chkCasillero = new CheckBox();
+            chkEstudiante = new CheckBox();
+            grpPago = new GroupBox();
+            grpPago.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitulo
@@ -59,70 +62,67 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(142, 103);
+            lblNombre.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblNombre.Location = new Point(38, 64);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(54, 15);
+            lblNombre.Size = new Size(75, 21);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre:";
             // 
             // lblEdad
             // 
             lblEdad.AutoSize = true;
-            lblEdad.Location = new Point(142, 142);
+            lblEdad.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblEdad.Location = new Point(38, 93);
             lblEdad.Name = "lblEdad";
-            lblEdad.Size = new Size(36, 15);
+            lblEdad.Size = new Size(50, 21);
             lblEdad.TabIndex = 2;
             lblEdad.Text = "Edad:";
             // 
             // lblPlanes
             // 
             lblPlanes.AutoSize = true;
-            lblPlanes.Location = new Point(142, 174);
+            lblPlanes.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblPlanes.Location = new Point(38, 122);
             lblPlanes.Name = "lblPlanes";
-            lblPlanes.Size = new Size(44, 15);
+            lblPlanes.Size = new Size(60, 21);
             lblPlanes.TabIndex = 3;
             lblPlanes.Text = "Planes:";
             // 
             // lblTurno
             // 
             lblTurno.AutoSize = true;
-            lblTurno.Location = new Point(142, 199);
+            lblTurno.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblTurno.Location = new Point(37, 151);
             lblTurno.Name = "lblTurno";
-            lblTurno.Size = new Size(42, 15);
+            lblTurno.Size = new Size(56, 21);
             lblTurno.TabIndex = 4;
             lblTurno.Text = "Turno:";
             // 
             // lblMeses
             // 
             lblMeses.AutoSize = true;
-            lblMeses.Location = new Point(148, 225);
+            lblMeses.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblMeses.Location = new Point(37, 180);
             lblMeses.Name = "lblMeses";
-            lblMeses.Size = new Size(43, 15);
+            lblMeses.Size = new Size(61, 21);
             lblMeses.TabIndex = 5;
             lblMeses.Text = "Meses:";
-            // 
-            // lblCasillero
-            // 
-            lblCasillero.AutoSize = true;
-            lblCasillero.Location = new Point(148, 250);
-            lblCasillero.Name = "lblCasillero";
-            lblCasillero.Size = new Size(55, 15);
-            lblCasillero.TabIndex = 6;
-            lblCasillero.Text = "Casillero:";
             // 
             // lblPago
             // 
             lblPago.AutoSize = true;
-            lblPago.Location = new Point(142, 278);
+            lblPago.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lblPago.Location = new Point(38, 238);
             lblPago.Name = "lblPago";
-            lblPago.Size = new Size(95, 15);
+            lblPago.Size = new Size(132, 21);
             lblPago.TabIndex = 7;
             lblPago.Text = "Formas de pago:";
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(295, 329);
+            comboBox1.Location = new Point(100, 122);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(116, 23);
             comboBox1.TabIndex = 8;
@@ -130,7 +130,7 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(295, 358);
+            comboBox2.Location = new Point(99, 153);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(116, 23);
             comboBox2.TabIndex = 9;
@@ -138,75 +138,104 @@
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(295, 387);
+            comboBox3.Location = new Point(102, 54);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(116, 23);
             comboBox3.TabIndex = 10;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(323, 416);
+            textBox1.Location = new Point(83, 93);
+            textBox1.MaxLength = 3;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(70, 23);
+            textBox1.Size = new Size(37, 23);
             textBox1.TabIndex = 11;
             // 
-            // radioButton1
+            // rbEfectivo
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(44, 393);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(94, 19);
-            radioButton1.TabIndex = 12;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "radioButton1";
-            radioButton1.UseVisualStyleBackColor = true;
+            rbEfectivo.AutoSize = true;
+            rbEfectivo.Location = new Point(2, 19);
+            rbEfectivo.Name = "rbEfectivo";
+            rbEfectivo.Size = new Size(67, 19);
+            rbEfectivo.TabIndex = 12;
+            rbEfectivo.TabStop = true;
+            rbEfectivo.Text = "Efectivo";
+            rbEfectivo.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbTarjeta
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(35, 437);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(94, 19);
-            radioButton2.TabIndex = 13;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "radioButton2";
-            radioButton2.UseVisualStyleBackColor = true;
+            rbTarjeta.AutoSize = true;
+            rbTarjeta.Location = new Point(102, 19);
+            rbTarjeta.Name = "rbTarjeta";
+            rbTarjeta.Size = new Size(60, 19);
+            rbTarjeta.TabIndex = 13;
+            rbTarjeta.TabStop = true;
+            rbTarjeta.Text = "Tarjeta";
+            rbTarjeta.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // textBox2
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(161, 393);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(94, 19);
-            radioButton3.TabIndex = 14;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "radioButton3";
-            radioButton3.UseVisualStyleBackColor = true;
+            textBox2.Location = new Point(119, 64);
+            textBox2.MaxLength = 32;
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(97, 23);
+            textBox2.TabIndex = 15;
             // 
-            // label1
+            // textBox3
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(142, 306);
-            label1.Name = "label1";
-            label1.Size = new Size(95, 15);
-            label1.TabIndex = 15;
-            label1.Text = "Formas de pago:";
+            textBox3.Location = new Point(99, 180);
+            textBox3.MaxLength = 2;
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(37, 23);
+            textBox3.TabIndex = 16;
+            // 
+            // chkCasillero
+            // 
+            chkCasillero.AutoSize = true;
+            chkCasillero.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            chkCasillero.Location = new Point(38, 209);
+            chkCasillero.Name = "chkCasillero";
+            chkCasillero.Size = new Size(91, 25);
+            chkCasillero.TabIndex = 17;
+            chkCasillero.Text = "Casillero";
+            chkCasillero.UseVisualStyleBackColor = true;
+            // 
+            // chkEstudiante
+            // 
+            chkEstudiante.AutoSize = true;
+            chkEstudiante.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            chkEstudiante.Location = new Point(149, 90);
+            chkEstudiante.Name = "chkEstudiante";
+            chkEstudiante.Size = new Size(105, 25);
+            chkEstudiante.TabIndex = 18;
+            chkEstudiante.Text = "Estudiante";
+            chkEstudiante.UseVisualStyleBackColor = true;
+            // 
+            // grpPago
+            // 
+            grpPago.Controls.Add(rbTarjeta);
+            grpPago.Controls.Add(rbEfectivo);
+            grpPago.Controls.Add(comboBox3);
+            grpPago.Location = new Point(174, 222);
+            grpPago.Name = "grpPago";
+            grpPago.Size = new Size(229, 95);
+            grpPago.TabIndex = 19;
+            grpPago.TabStop = false;
             // 
             // frmInscripción
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(518, 584);
-            Controls.Add(label1);
-            Controls.Add(radioButton3);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
+            Controls.Add(grpPago);
+            Controls.Add(chkEstudiante);
+            Controls.Add(chkCasillero);
+            Controls.Add(textBox3);
+            Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Controls.Add(comboBox3);
             Controls.Add(comboBox2);
             Controls.Add(comboBox1);
             Controls.Add(lblPago);
-            Controls.Add(lblCasillero);
             Controls.Add(lblMeses);
             Controls.Add(lblTurno);
             Controls.Add(lblPlanes);
@@ -215,6 +244,8 @@
             Controls.Add(lblTitulo);
             Name = "frmInscripción";
             Text = "frmGimnasioSiglo";
+            grpPago.ResumeLayout(false);
+            grpPago.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -227,15 +258,17 @@
         private Label lblPlanes;
         private Label lblTurno;
         private Label lblMeses;
-        private Label lblCasillero;
         private Label lblPago;
         private ComboBox comboBox1;
         private ComboBox comboBox2;
         private ComboBox comboBox3;
         private TextBox textBox1;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton3;
-        private Label label1;
+        private RadioButton rbEfectivo;
+        private RadioButton rbTarjeta;
+        private TextBox textBox2;
+        private TextBox textBox3;
+        private CheckBox chkCasillero;
+        private CheckBox chkEstudiante;
+        private GroupBox grpPago;
     }
 }
