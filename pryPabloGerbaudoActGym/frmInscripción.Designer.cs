@@ -35,17 +35,19 @@
             lblTurno = new Label();
             lblMeses = new Label();
             lblPago = new Label();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            textBox1 = new TextBox();
-            rbEfectivo = new RadioButton();
-            rbTarjeta = new RadioButton();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            cmbPlane = new ComboBox();
+            cmbTurno = new ComboBox();
+            txtEdad = new TextBox();
+            txtNom = new TextBox();
+            txtMeses = new TextBox();
             chkCasillero = new CheckBox();
             chkEstudiante = new CheckBox();
+            cmbPago = new ComboBox();
+            rbEfectivo = new RadioButton();
+            rbTarjeta = new RadioButton();
             grpPago = new GroupBox();
+            btnCalcular = new Button();
+            btnLimpiar = new Button();
             grpPago.SuspendLayout();
             SuspendLayout();
             // 
@@ -116,78 +118,53 @@
             lblPago.Location = new Point(38, 238);
             lblPago.Name = "lblPago";
             lblPago.Size = new Size(132, 21);
-            lblPago.TabIndex = 7;
+            lblPago.TabIndex = 8;
             lblPago.Text = "Formas de pago:";
             // 
-            // comboBox1
+            // cmbPlane
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(100, 122);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(116, 23);
-            comboBox1.TabIndex = 8;
+            cmbPlane.FormattingEnabled = true;
+            cmbPlane.Location = new Point(100, 122);
+            cmbPlane.Name = "cmbPlane";
+            cmbPlane.Size = new Size(116, 23);
+            cmbPlane.TabIndex = 4;
+            cmbPlane.SelectedIndexChanged += cmbPlane_SelectedIndexChanged;
             // 
-            // comboBox2
+            // cmbTurno
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(99, 153);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(116, 23);
-            comboBox2.TabIndex = 9;
+            cmbTurno.FormattingEnabled = true;
+            cmbTurno.Location = new Point(99, 153);
+            cmbTurno.Name = "cmbTurno";
+            cmbTurno.Size = new Size(116, 23);
+            cmbTurno.TabIndex = 5;
+            cmbTurno.SelectedIndexChanged += cmbTurno_SelectedIndexChanged;
             // 
-            // comboBox3
+            // txtEdad
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(102, 54);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(116, 23);
-            comboBox3.TabIndex = 10;
+            txtEdad.Location = new Point(83, 93);
+            txtEdad.MaxLength = 3;
+            txtEdad.Name = "txtEdad";
+            txtEdad.Size = new Size(37, 23);
+            txtEdad.TabIndex = 2;
+            txtEdad.TextChanged += txtEdad_TextChanged;
             // 
-            // textBox1
+            // txtNom
             // 
-            textBox1.Location = new Point(83, 93);
-            textBox1.MaxLength = 3;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(37, 23);
-            textBox1.TabIndex = 11;
+            txtNom.Location = new Point(119, 64);
+            txtNom.MaxLength = 30;
+            txtNom.Name = "txtNom";
+            txtNom.Size = new Size(97, 23);
+            txtNom.TabIndex = 1;
+            txtNom.TextChanged += txtNom_TextChanged;
             // 
-            // rbEfectivo
+            // txtMeses
             // 
-            rbEfectivo.AutoSize = true;
-            rbEfectivo.Location = new Point(2, 19);
-            rbEfectivo.Name = "rbEfectivo";
-            rbEfectivo.Size = new Size(67, 19);
-            rbEfectivo.TabIndex = 12;
-            rbEfectivo.TabStop = true;
-            rbEfectivo.Text = "Efectivo";
-            rbEfectivo.UseVisualStyleBackColor = true;
-            // 
-            // rbTarjeta
-            // 
-            rbTarjeta.AutoSize = true;
-            rbTarjeta.Location = new Point(102, 19);
-            rbTarjeta.Name = "rbTarjeta";
-            rbTarjeta.Size = new Size(60, 19);
-            rbTarjeta.TabIndex = 13;
-            rbTarjeta.TabStop = true;
-            rbTarjeta.Text = "Tarjeta";
-            rbTarjeta.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(119, 64);
-            textBox2.MaxLength = 32;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(97, 23);
-            textBox2.TabIndex = 15;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(99, 180);
-            textBox3.MaxLength = 2;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(37, 23);
-            textBox3.TabIndex = 16;
+            txtMeses.Location = new Point(99, 180);
+            txtMeses.MaxLength = 2;
+            txtMeses.Name = "txtMeses";
+            txtMeses.Size = new Size(37, 23);
+            txtMeses.TabIndex = 6;
+            txtMeses.TextChanged += txtMeses_TextChanged;
             // 
             // chkCasillero
             // 
@@ -196,7 +173,7 @@
             chkCasillero.Location = new Point(38, 209);
             chkCasillero.Name = "chkCasillero";
             chkCasillero.Size = new Size(91, 25);
-            chkCasillero.TabIndex = 17;
+            chkCasillero.TabIndex = 7;
             chkCasillero.Text = "Casillero";
             chkCasillero.UseVisualStyleBackColor = true;
             // 
@@ -207,34 +184,90 @@
             chkEstudiante.Location = new Point(149, 90);
             chkEstudiante.Name = "chkEstudiante";
             chkEstudiante.Size = new Size(105, 25);
-            chkEstudiante.TabIndex = 18;
+            chkEstudiante.TabIndex = 3;
             chkEstudiante.Text = "Estudiante";
             chkEstudiante.UseVisualStyleBackColor = true;
             // 
+            // cmbPago
+            // 
+            cmbPago.FormattingEnabled = true;
+            cmbPago.Location = new Point(112, 64);
+            cmbPago.Name = "cmbPago";
+            cmbPago.Size = new Size(116, 23);
+            cmbPago.TabIndex = 2;
+            cmbPago.SelectedIndexChanged += cmbPago_SelectedIndexChanged;
+            // 
+            // rbEfectivo
+            // 
+            rbEfectivo.AutoSize = true;
+            rbEfectivo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            rbEfectivo.Location = new Point(10, 22);
+            rbEfectivo.Name = "rbEfectivo";
+            rbEfectivo.Size = new Size(87, 25);
+            rbEfectivo.TabIndex = 0;
+            rbEfectivo.TabStop = true;
+            rbEfectivo.Text = "Efectivo";
+            rbEfectivo.UseVisualStyleBackColor = true;
+            rbEfectivo.CheckedChanged += rbEfectivo_CheckedChanged;
+            // 
+            // rbTarjeta
+            // 
+            rbTarjeta.AutoSize = true;
+            rbTarjeta.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            rbTarjeta.Location = new Point(112, 22);
+            rbTarjeta.Name = "rbTarjeta";
+            rbTarjeta.Size = new Size(76, 25);
+            rbTarjeta.TabIndex = 1;
+            rbTarjeta.TabStop = true;
+            rbTarjeta.Text = "Tarjeta";
+            rbTarjeta.UseVisualStyleBackColor = true;
+            rbTarjeta.CheckedChanged += rbTarjeta_CheckedChanged;
+            // 
             // grpPago
             // 
-            grpPago.Controls.Add(rbTarjeta);
             grpPago.Controls.Add(rbEfectivo);
-            grpPago.Controls.Add(comboBox3);
-            grpPago.Location = new Point(174, 222);
+            grpPago.Controls.Add(rbTarjeta);
+            grpPago.Controls.Add(cmbPago);
+            grpPago.Location = new Point(177, 219);
             grpPago.Name = "grpPago";
-            grpPago.Size = new Size(229, 95);
-            grpPago.TabIndex = 19;
+            grpPago.Size = new Size(241, 116);
+            grpPago.TabIndex = 9;
             grpPago.TabStop = false;
+            // 
+            // btnCalcular
+            // 
+            btnCalcular.Location = new Point(346, 376);
+            btnCalcular.Name = "btnCalcular";
+            btnCalcular.Size = new Size(148, 43);
+            btnCalcular.TabIndex = 10;
+            btnCalcular.Text = "&Calcular";
+            btnCalcular.UseVisualStyleBackColor = true;
+            // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Location = new Point(1, 376);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(148, 43);
+            btnLimpiar.TabIndex = 11;
+            btnLimpiar.Text = "&Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
             // 
             // frmInscripción
             // 
+            AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(518, 584);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnCalcular);
             Controls.Add(grpPago);
             Controls.Add(chkEstudiante);
             Controls.Add(chkCasillero);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
+            Controls.Add(txtMeses);
+            Controls.Add(txtNom);
+            Controls.Add(txtEdad);
+            Controls.Add(cmbTurno);
+            Controls.Add(cmbPlane);
             Controls.Add(lblPago);
             Controls.Add(lblMeses);
             Controls.Add(lblTurno);
@@ -242,7 +275,10 @@
             Controls.Add(lblEdad);
             Controls.Add(lblNombre);
             Controls.Add(lblTitulo);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MinimizeBox = false;
             Name = "frmInscripción";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmGimnasioSiglo";
             grpPago.ResumeLayout(false);
             grpPago.PerformLayout();
@@ -259,16 +295,18 @@
         private Label lblTurno;
         private Label lblMeses;
         private Label lblPago;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private TextBox textBox1;
-        private RadioButton rbEfectivo;
-        private RadioButton rbTarjeta;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private ComboBox cmbPlane;
+        private ComboBox cmbTurno;
+        private TextBox txtEdad;
+        private TextBox txtNom;
+        private TextBox txtMeses;
         private CheckBox chkCasillero;
         private CheckBox chkEstudiante;
+        private ComboBox cmbPago;
+        private RadioButton rbEfectivo;
+        private RadioButton rbTarjeta;
         private GroupBox grpPago;
+        private Button btnCalcular;
+        private Button btnLimpiar;
     }
 }
