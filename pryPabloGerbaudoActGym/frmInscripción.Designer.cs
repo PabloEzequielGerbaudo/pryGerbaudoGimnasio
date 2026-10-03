@@ -147,6 +147,7 @@
             txtEdad.Size = new Size(37, 23);
             txtEdad.TabIndex = 2;
             txtEdad.TextChanged += txtEdad_TextChanged;
+            txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // txtNom
             // 

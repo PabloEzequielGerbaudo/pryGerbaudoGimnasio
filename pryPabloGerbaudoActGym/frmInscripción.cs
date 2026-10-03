@@ -39,9 +39,9 @@ namespace pryPabloGerbaudoActGym
             cmbPago.Items.Add(6);
 
         }
-        
+
         string nom, edad, planes, turno, meses, pago;
-        int Edad, Meses, Total;
+        int Edad, Meses, Total, SubTotal;
 
         private void txtNom_TextChanged(object sender, EventArgs e)
         {
@@ -52,12 +52,19 @@ namespace pryPabloGerbaudoActGym
         {
 
             edad = txtEdad.Text;
-             if (txtEdad.Text != "")
-             {
-                    Edad = Convert.ToInt32(edad);
-             }
-            
-           
+            if (txtEdad.Text != "")
+            {
+                Edad = Convert.ToInt32(edad);
+            }
+
+
+        }
+        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void cmbPlane_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,13 +72,13 @@ namespace pryPabloGerbaudoActGym
             switch (cmbPlane.SelectedItem)
             {
                 case "Musculación":
-                    Total = Total + MUSCULACION;
+                    SubTotal = SubTotal + MUSCULACION;
                     break;
                 case "Funcional":
-                    Total = Total + FUNCIONAL;
+                    SubTotal = SubTotal + FUNCIONAL;
                     break;
                 case "Natación":
-                    Total = Total + NATACION;
+                    SubTotal = SubTotal + NATACION;
                     break;
             }
         }
@@ -101,23 +108,25 @@ namespace pryPabloGerbaudoActGym
         {
             if (pago == "Efectivo")
             {
-                
+
             }
             else if (pago == "Tarjeta")
             {
-               switch (cmbPago.SelectedItem)
+                switch (cmbPago.SelectedItem)
                 {
                     case 1:
-                        
+
                         break;
                     case 3:
-                       
+
                         break;
                     case 6:
-                        
+
                         break;
                 }
-            }   
+            }
         }
+
+        
     }
 }
