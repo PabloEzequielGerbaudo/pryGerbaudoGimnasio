@@ -47,7 +47,13 @@ namespace pryPabloGerbaudoActGym
         {
             nom = txtNom.Text;
         }
-
+        private void txtNom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         private void txtEdad_TextChanged(object sender, EventArgs e)
         {
 
@@ -85,7 +91,7 @@ namespace pryPabloGerbaudoActGym
 
         private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ()
+                
         }
 
         private void txtMeses_TextChanged(object sender, EventArgs e)
@@ -127,6 +133,5 @@ namespace pryPabloGerbaudoActGym
             }
         }
 
-        
     }
 }

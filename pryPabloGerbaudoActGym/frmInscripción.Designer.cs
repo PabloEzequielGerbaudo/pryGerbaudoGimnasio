@@ -157,6 +157,7 @@
             txtNom.Size = new Size(97, 23);
             txtNom.TabIndex = 1;
             txtNom.TextChanged += txtNom_TextChanged;
+            txtNom.KeyPress += txtNom_KeyPress;
             // 
             // txtMeses
             // 
