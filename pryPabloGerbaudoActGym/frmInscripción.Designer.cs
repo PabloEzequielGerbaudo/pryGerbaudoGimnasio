@@ -123,15 +123,20 @@
             // 
             // cmbPlane
             // 
+            cmbPlane.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlane.Enabled = false;
             cmbPlane.FormattingEnabled = true;
             cmbPlane.Location = new Point(100, 122);
             cmbPlane.Name = "cmbPlane";
             cmbPlane.Size = new Size(116, 23);
             cmbPlane.TabIndex = 4;
             cmbPlane.SelectedIndexChanged += cmbPlane_SelectedIndexChanged;
+            cmbPlane.Click += cmbPlane_Click;
             // 
             // cmbTurno
             // 
+            cmbTurno.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTurno.Enabled = false;
             cmbTurno.FormattingEnabled = true;
             cmbTurno.Location = new Point(99, 153);
             cmbTurno.Name = "cmbTurno";
@@ -141,16 +146,19 @@
             // 
             // txtEdad
             // 
+            txtEdad.Enabled = false;
             txtEdad.Location = new Point(83, 93);
             txtEdad.MaxLength = 3;
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(37, 23);
             txtEdad.TabIndex = 2;
+            txtEdad.Click += txtEdad_Click_1;
             txtEdad.TextChanged += txtEdad_TextChanged;
             txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // txtNom
             // 
+            txtNom.CharacterCasing = CharacterCasing.Upper;
             txtNom.Location = new Point(119, 64);
             txtNom.MaxLength = 30;
             txtNom.Name = "txtNom";
@@ -161,6 +169,7 @@
             // 
             // txtMeses
             // 
+            txtMeses.Enabled = false;
             txtMeses.Location = new Point(99, 180);
             txtMeses.MaxLength = 2;
             txtMeses.Name = "txtMeses";
@@ -192,6 +201,8 @@
             // 
             // cmbPago
             // 
+            cmbPago.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPago.Enabled = false;
             cmbPago.FormattingEnabled = true;
             cmbPago.Location = new Point(112, 64);
             cmbPago.Name = "cmbPago";
@@ -249,6 +260,7 @@
             // 
             // btnLimpiar
             // 
+            btnLimpiar.Enabled = false;
             btnLimpiar.Location = new Point(1, 376);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(148, 43);
@@ -261,7 +273,7 @@
             AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(518, 584);
+            ClientSize = new Size(518, 453);
             Controls.Add(btnLimpiar);
             Controls.Add(btnCalcular);
             Controls.Add(grpPago);
@@ -280,10 +292,11 @@
             Controls.Add(lblNombre);
             Controls.Add(lblTitulo);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmInscripción";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "frmGimnasioSiglo";
+            Text = "Gimnasio Siglo-Inscripción";
             grpPago.ResumeLayout(false);
             grpPago.PerformLayout();
             ResumeLayout(false);

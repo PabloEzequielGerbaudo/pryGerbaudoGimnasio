@@ -20,8 +20,9 @@ namespace pryPabloGerbaudoActGym
         const decimal DESCUENTO_MENOR = 0.25m;
         const decimal DESCUENTO_MAYOR = 0.30m;
         const decimal DESCUENTO_ESTUDIANTE = 0.15m;
-        const int RECARGO = 10;
-        const int RECARGO2 = 20;
+        const decimal DESCUENTO_EFECTIVO = 0.10m;
+        const decimal RECARGO_CUOTA3 = 0.10m;
+        const decimal RECARGO_CUOTA6 = 0.30m;
 
 
         public frmInscripción()
@@ -44,11 +45,20 @@ namespace pryPabloGerbaudoActGym
 
         string nom, edad, planes, turno, meses, pago;
         int Edad, Meses;
-        decimal Total, SubTotal, Desc_Edad;
+        decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago;
 
         private void txtNom_TextChanged(object sender, EventArgs e)
         {
             nom = txtNom.Text;
+            if (txtNom.Text != "")
+            {
+                txtEdad.Enabled = true;
+            }
+            else
+            {
+                txtEdad.Enabled = false;
+            }
+
         }
         private void txtNom_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -64,10 +74,30 @@ namespace pryPabloGerbaudoActGym
             if (txtEdad.Text != "")
             {
                 Edad = Convert.ToInt32(edad);
+                cmbPlane.Enabled = true;
             }
-            if (Edad <18)
+            else
+            {
+                cmbPlane.Enabled = false;
+            }
+
+
+        }
+
+        private void txtEdad_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+        private void cmbPlane_Click(object sender, EventArgs e)
+        {
+            if (Edad < 18)
             {
                 edad = "menor";
+                if (Edad <= 14)
+                {
+                    MessageBox.Show("Los menores de 14 años no pueden inscribirse.");
+                    cmbPlane.Enabled = false;
+                }
             }
             else
             {
@@ -76,7 +106,6 @@ namespace pryPabloGerbaudoActGym
                     edad = "mayor";
                 }
             }
-
         }
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -89,22 +118,38 @@ namespace pryPabloGerbaudoActGym
         private void cmbPlane_SelectedIndexChanged(object sender, EventArgs e)
         {
             planes = cmbPlane.Text;
-            
+            if (cmbPlane.SelectedIndex != -1)
+            {
+                cmbTurno.Enabled = true;
+            }
+            else
+            {
+                cmbTurno.Enabled = false;
+            }
+
         }
 
         private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            turno = cmbTurno.Text;
+            if (cmbTurno.SelectedIndex != -1)
+            {
+                txtMeses.Enabled = true;
+            }
+            else
+            {
+                txtMeses.Enabled = false;
+            }
         }
 
         private void txtMeses_TextChanged(object sender, EventArgs e)
         {
             meses = txtMeses.Text;
-            if (txtMeses.Text !="")
+            if (txtMeses.Text != "")
             {
                 Meses = Convert.ToInt32(meses);
             }
-            
+
             if (txtNom.Text != "")
             {
                 if (txtEdad.Text != "")
@@ -143,29 +188,19 @@ namespace pryPabloGerbaudoActGym
         private void rbTarjeta_CheckedChanged(object sender, EventArgs e)
         {
             pago = "Tarjeta";
+            if (rbTarjeta.Checked == true)
+            {
+                cmbPago.Enabled = true;
+            }
+            else
+            {
+                cmbPago.Enabled = false;
+            }
         }
 
         private void cmbPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (pago == "Efectivo")
-            {
 
-            }
-            else if (pago == "Tarjeta")
-            {
-                switch (cmbPago.SelectedItem)
-                {
-                    case 1:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 6:
-
-                        break;
-                }
-            }
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -174,7 +209,7 @@ namespace pryPabloGerbaudoActGym
             {
                 case "Musculación":
 
-                    if (chkCasillero.Checked = true)
+                    if (chkCasillero.Checked == true)
                     {
                         SubTotal = SubTotal + (MUSCULACION + CASILLERO) * Meses;
                     }
@@ -184,7 +219,7 @@ namespace pryPabloGerbaudoActGym
                     }
                     break;
                 case "Funcional":
-                    if (chkCasillero.Checked = true)
+                    if (chkCasillero.Checked == true)
                     {
                         SubTotal = SubTotal + (FUNCIONAL + CASILLERO) * Meses;
                     }
@@ -192,10 +227,10 @@ namespace pryPabloGerbaudoActGym
                     {
                         SubTotal = SubTotal + (FUNCIONAL * Meses);
                     }
-                    
+
                     break;
                 case "Natación":
-                    if (chkCasillero.Checked = true)
+                    if (chkCasillero.Checked == true)
                     {
                         SubTotal = SubTotal + (NATACION + CASILLERO) * Meses;
                     }
@@ -208,18 +243,46 @@ namespace pryPabloGerbaudoActGym
             switch (edad)
             {
                 case "menor":
-                    Desc_Edad = (SubTotal * DESCUENTO_MENOR) / 100;
+                    Desc_Edad = (SubTotal * DESCUENTO_MENOR);
+                    SubTotal = SubTotal - Desc_Edad;
                     break;
                 case "mayor":
-                    Desc_Edad = (SubTotal * DESCUENTO_MAYOR) / 100;
+                    Desc_Edad = (SubTotal * DESCUENTO_MAYOR);
+                    SubTotal = SubTotal - Desc_Edad;
                     break;
                 default:
-                    if (chkEstudiante.Checked = true)
+                    if (chkEstudiante.Checked == true)
                     {
-                        Desc_Edad = (SubTotal * DESCUENTO_ESTUDIANTE) / 100;
+                        Desc_Edad = (SubTotal * DESCUENTO_ESTUDIANTE);
+                        SubTotal = SubTotal - Desc_Edad;
                     }
                     break;
             }
+
+            if (pago == "Efectivo")
+            {
+                Desc_Pago = (SubTotal * DESCUENTO_EFECTIVO);
+                Total = SubTotal - Desc_Pago;
+            }
+            else if (pago == "Tarjeta")
+            {
+                switch (cmbPago.SelectedItem)
+                {
+                    case 3:
+                        Recargo_Pago = (SubTotal * RECARGO_CUOTA3);
+                        Total = SubTotal + Recargo_Pago;
+                        break;
+                    case 6:
+                        Recargo_Pago = (SubTotal * RECARGO_CUOTA6);
+                        Total = SubTotal + Recargo_Pago;
+                        break;
+                }
+            }
+            MessageBox.Show("El total a pagar es: " + Total);
+
         }
+
+        
+        
     }
 }
