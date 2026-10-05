@@ -17,7 +17,9 @@ namespace pryPabloGerbaudoActGym
         const int FUNCIONAL = 18000;
         const int NATACION = 22000;
         const int CASILLERO = 3000;
-        const int DESCUENTO = 10;
+        const decimal DESCUENTO_MENOR = 0.25m;
+        const decimal DESCUENTO_MAYOR = 0.30m;
+        const decimal DESCUENTO_ESTUDIANTE = 0.15m;
         const int RECARGO = 10;
         const int RECARGO2 = 20;
 
@@ -41,7 +43,8 @@ namespace pryPabloGerbaudoActGym
         }
 
         string nom, edad, planes, turno, meses, pago;
-        int Edad, Meses, Total, SubTotal;
+        int Edad, Meses;
+        decimal Total, SubTotal, Desc_Edad;
 
         private void txtNom_TextChanged(object sender, EventArgs e)
         {
@@ -62,7 +65,17 @@ namespace pryPabloGerbaudoActGym
             {
                 Edad = Convert.ToInt32(edad);
             }
-
+            if (Edad <18)
+            {
+                edad = "menor";
+            }
+            else
+            {
+                if (Edad >= 65)
+                {
+                    edad = "mayor";
+                }
+            }
 
         }
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
@@ -75,31 +88,53 @@ namespace pryPabloGerbaudoActGym
 
         private void cmbPlane_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (cmbPlane.SelectedItem)
-            {
-                case "Musculación":
-                    SubTotal = SubTotal + MUSCULACION;
-                    break;
-                case "Funcional":
-                    SubTotal = SubTotal + FUNCIONAL;
-                    break;
-                case "Natación":
-                    SubTotal = SubTotal + NATACION;
-                    break;
-            }
+            planes = cmbPlane.Text;
+            
         }
 
         private void cmbTurno_SelectedIndexChanged(object sender, EventArgs e)
         {
-                
+
         }
 
         private void txtMeses_TextChanged(object sender, EventArgs e)
         {
             meses = txtMeses.Text;
-            Meses = Convert.ToInt32(meses);
+            if (txtMeses.Text !="")
+            {
+                Meses = Convert.ToInt32(meses);
+            }
+            
+            if (txtNom.Text != "")
+            {
+                if (txtEdad.Text != "")
+                {
+                    if (txtMeses.Text != "")
+                    {
+                        btnCalcular.Enabled = true;
+                    }
+                    else
+                    {
+                        btnCalcular.Enabled = false;
+                    }
+                }
+                else
+                {
+                    btnCalcular.Enabled = false;
+                }
+            }
+            else
+            {
+                btnCalcular.Enabled = false;
+            }
         }
-
+        private void txtMeses_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         private void rbEfectivo_CheckedChanged(object sender, EventArgs e)
         {
             pago = "Efectivo";
@@ -133,5 +168,58 @@ namespace pryPabloGerbaudoActGym
             }
         }
 
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+            switch (planes)
+            {
+                case "Musculación":
+
+                    if (chkCasillero.Checked = true)
+                    {
+                        SubTotal = SubTotal + (MUSCULACION + CASILLERO) * Meses;
+                    }
+                    else
+                    {
+                        SubTotal = SubTotal + (MUSCULACION * Meses);
+                    }
+                    break;
+                case "Funcional":
+                    if (chkCasillero.Checked = true)
+                    {
+                        SubTotal = SubTotal + (FUNCIONAL + CASILLERO) * Meses;
+                    }
+                    else
+                    {
+                        SubTotal = SubTotal + (FUNCIONAL * Meses);
+                    }
+                    
+                    break;
+                case "Natación":
+                    if (chkCasillero.Checked = true)
+                    {
+                        SubTotal = SubTotal + (NATACION + CASILLERO) * Meses;
+                    }
+                    else
+                    {
+                        SubTotal = SubTotal + (NATACION * Meses);
+                    }
+                    break;
+            }
+            switch (edad)
+            {
+                case "menor":
+                    Desc_Edad = (SubTotal * DESCUENTO_MENOR) / 100;
+                    break;
+                case "mayor":
+                    Desc_Edad = (SubTotal * DESCUENTO_MAYOR) / 100;
+                    break;
+                default:
+                    if (chkEstudiante.Checked = true)
+                    {
+                        Desc_Edad = (SubTotal * DESCUENTO_ESTUDIANTE) / 100;
+                    }
+                    break;
+            }
+        }
     }
 }

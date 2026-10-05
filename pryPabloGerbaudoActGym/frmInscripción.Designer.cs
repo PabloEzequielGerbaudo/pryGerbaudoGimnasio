@@ -238,12 +238,14 @@
             // 
             // btnCalcular
             // 
+            btnCalcular.Enabled = false;
             btnCalcular.Location = new Point(346, 376);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(148, 43);
             btnCalcular.TabIndex = 10;
             btnCalcular.Text = "&Calcular";
             btnCalcular.UseVisualStyleBackColor = true;
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // btnLimpiar
             // 
