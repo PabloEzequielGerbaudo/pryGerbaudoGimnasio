@@ -23,6 +23,9 @@ namespace pryPabloGerbaudoActGym
         const decimal DESCUENTO_EFECTIVO = 0.10m;
         const decimal RECARGO_CUOTA3 = 0.10m;
         const decimal RECARGO_CUOTA6 = 0.30m;
+        string nom, edad, planes, turno, meses, pago;
+        int Edad, Meses;
+        decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago;
 
 
         public frmInscripción()
@@ -43,10 +46,34 @@ namespace pryPabloGerbaudoActGym
 
         }
 
-        string nom, edad, planes, turno, meses, pago;
-        int Edad, Meses;
-        decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago;
+        private void EstadoInicial()
+        {
+            txtNom.Clear();
+            txtEdad.Clear();
+            txtMeses.Clear();
+            txtMeses.Text = "1";
+            cmbPlanes.SelectedIndex = 0;
+            cmbTurno.SelectedIndex = 0;
+            cmbPago.SelectedIndex = -1;
+            chkCasillero.Checked = false;
+            chkEstudiante.Checked = false;
+            rbEfectivo.Checked = true;
+            rbTarjeta.Checked = false;
+            btnCalcular.Enabled = false;
+            txtNom.Focus();
+            Edad = 0;
+            Meses = 0;
+            Total = 0;
+            SubTotal = 0;
+            Desc_Edad = 0;
+            Desc_Pago = 0;
+            Recargo_Pago = 0;
 
+        }
+        private void frmInscripción_Load(object sender, EventArgs e)
+        {
+            EstadoInicial();
+        }
         private void txtNom_TextChanged(object sender, EventArgs e)
         {
             nom = txtNom.Text;
@@ -97,6 +124,9 @@ namespace pryPabloGerbaudoActGym
                 {
                     MessageBox.Show("Los menores de 14 años no pueden inscribirse.");
                     cmbPlanes.Enabled = false;
+                    txtEdad.Clear();
+                    txtEdad.Focus();
+
                 }
             }
             else
@@ -289,20 +319,9 @@ namespace pryPabloGerbaudoActGym
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtNom.Clear();
-            txtEdad.Clear();
-            txtMeses.Clear();
-            cmbPlanes.SelectedIndex = 0;
-            cmbTurno.SelectedIndex = 0;
-            cmbPago.SelectedIndex = -1;
-            rbEfectivo.Checked = true;
-            Edad = 0;
-            Meses = 0;
-            Total = 0;
-            SubTotal = 0;
-            Desc_Edad = 0;
-            Desc_Pago = 0;
-            Recargo_Pago = 0;
+            EstadoInicial();
         }
+
+       
     }
 }

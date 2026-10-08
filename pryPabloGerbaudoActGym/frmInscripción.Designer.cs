@@ -55,7 +55,7 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(169, 9);
+            lblTitulo.Location = new Point(61, 24);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(155, 37);
             lblTitulo.TabIndex = 0;
@@ -115,7 +115,7 @@
             // 
             lblPago.AutoSize = true;
             lblPago.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lblPago.Location = new Point(38, 238);
+            lblPago.Location = new Point(0, 19);
             lblPago.Name = "lblPago";
             lblPago.Size = new Size(132, 21);
             lblPago.TabIndex = 8;
@@ -126,7 +126,7 @@
             cmbPlanes.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPlanes.Enabled = false;
             cmbPlanes.FormattingEnabled = true;
-            cmbPlanes.Location = new Point(100, 122);
+            cmbPlanes.Location = new Point(119, 124);
             cmbPlanes.Name = "cmbPlanes";
             cmbPlanes.Size = new Size(116, 23);
             cmbPlanes.TabIndex = 4;
@@ -138,7 +138,7 @@
             cmbTurno.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTurno.Enabled = false;
             cmbTurno.FormattingEnabled = true;
-            cmbTurno.Location = new Point(99, 153);
+            cmbTurno.Location = new Point(118, 155);
             cmbTurno.Name = "cmbTurno";
             cmbTurno.Size = new Size(116, 23);
             cmbTurno.TabIndex = 5;
@@ -147,7 +147,7 @@
             // txtEdad
             // 
             txtEdad.Enabled = false;
-            txtEdad.Location = new Point(83, 93);
+            txtEdad.Location = new Point(119, 93);
             txtEdad.MaxLength = 3;
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(37, 23);
@@ -170,7 +170,7 @@
             // txtMeses
             // 
             txtMeses.Enabled = false;
-            txtMeses.Location = new Point(99, 180);
+            txtMeses.Location = new Point(118, 182);
             txtMeses.MaxLength = 2;
             txtMeses.Name = "txtMeses";
             txtMeses.Size = new Size(37, 23);
@@ -181,7 +181,7 @@
             // 
             chkCasillero.AutoSize = true;
             chkCasillero.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkCasillero.Location = new Point(38, 209);
+            chkCasillero.Location = new Point(163, 184);
             chkCasillero.Name = "chkCasillero";
             chkCasillero.Size = new Size(91, 25);
             chkCasillero.TabIndex = 7;
@@ -192,7 +192,7 @@
             // 
             chkEstudiante.AutoSize = true;
             chkEstudiante.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            chkEstudiante.Location = new Point(149, 90);
+            chkEstudiante.Location = new Point(162, 93);
             chkEstudiante.Name = "chkEstudiante";
             chkEstudiante.Size = new Size(105, 25);
             chkEstudiante.TabIndex = 3;
@@ -204,7 +204,7 @@
             cmbPago.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPago.Enabled = false;
             cmbPago.FormattingEnabled = true;
-            cmbPago.Location = new Point(112, 64);
+            cmbPago.Location = new Point(112, 83);
             cmbPago.Name = "cmbPago";
             cmbPago.Size = new Size(116, 23);
             cmbPago.TabIndex = 2;
@@ -215,7 +215,7 @@
             rbEfectivo.AutoSize = true;
             rbEfectivo.Checked = true;
             rbEfectivo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            rbEfectivo.Location = new Point(10, 22);
+            rbEfectivo.Location = new Point(12, 51);
             rbEfectivo.Name = "rbEfectivo";
             rbEfectivo.Size = new Size(87, 25);
             rbEfectivo.TabIndex = 0;
@@ -228,7 +228,7 @@
             // 
             rbTarjeta.AutoSize = true;
             rbTarjeta.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            rbTarjeta.Location = new Point(112, 22);
+            rbTarjeta.Location = new Point(112, 51);
             rbTarjeta.Name = "rbTarjeta";
             rbTarjeta.Size = new Size(76, 25);
             rbTarjeta.TabIndex = 1;
@@ -241,18 +241,19 @@
             grpPago.Controls.Add(rbEfectivo);
             grpPago.Controls.Add(rbTarjeta);
             grpPago.Controls.Add(cmbPago);
-            grpPago.Location = new Point(177, 219);
+            grpPago.Controls.Add(lblPago);
+            grpPago.Location = new Point(26, 215);
             grpPago.Name = "grpPago";
-            grpPago.Size = new Size(241, 116);
+            grpPago.Size = new Size(241, 113);
             grpPago.TabIndex = 9;
             grpPago.TabStop = false;
             // 
             // btnCalcular
             // 
             btnCalcular.Enabled = false;
-            btnCalcular.Location = new Point(346, 376);
+            btnCalcular.Location = new Point(139, 347);
             btnCalcular.Name = "btnCalcular";
-            btnCalcular.Size = new Size(148, 43);
+            btnCalcular.Size = new Size(128, 43);
             btnCalcular.TabIndex = 10;
             btnCalcular.Text = "&Calcular";
             btnCalcular.UseVisualStyleBackColor = true;
@@ -261,9 +262,9 @@
             // btnLimpiar
             // 
             btnLimpiar.Enabled = false;
-            btnLimpiar.Location = new Point(1, 376);
+            btnLimpiar.Location = new Point(3, 347);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(148, 43);
+            btnLimpiar.Size = new Size(122, 43);
             btnLimpiar.TabIndex = 11;
             btnLimpiar.Text = "&Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
@@ -274,7 +275,7 @@
             AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(518, 453);
+            ClientSize = new Size(318, 398);
             Controls.Add(btnLimpiar);
             Controls.Add(btnCalcular);
             Controls.Add(grpPago);
@@ -285,7 +286,6 @@
             Controls.Add(txtEdad);
             Controls.Add(cmbTurno);
             Controls.Add(cmbPlanes);
-            Controls.Add(lblPago);
             Controls.Add(lblMeses);
             Controls.Add(lblTurno);
             Controls.Add(lblPlanes);
