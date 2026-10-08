@@ -35,7 +35,7 @@
             lblTurno = new Label();
             lblMeses = new Label();
             lblPago = new Label();
-            cmbPlane = new ComboBox();
+            cmbPlanes = new ComboBox();
             cmbTurno = new ComboBox();
             txtEdad = new TextBox();
             txtNom = new TextBox();
@@ -121,17 +121,17 @@
             lblPago.TabIndex = 8;
             lblPago.Text = "Formas de pago:";
             // 
-            // cmbPlane
+            // cmbPlanes
             // 
-            cmbPlane.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPlane.Enabled = false;
-            cmbPlane.FormattingEnabled = true;
-            cmbPlane.Location = new Point(100, 122);
-            cmbPlane.Name = "cmbPlane";
-            cmbPlane.Size = new Size(116, 23);
-            cmbPlane.TabIndex = 4;
-            cmbPlane.SelectedIndexChanged += cmbPlane_SelectedIndexChanged;
-            cmbPlane.Click += cmbPlane_Click;
+            cmbPlanes.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlanes.Enabled = false;
+            cmbPlanes.FormattingEnabled = true;
+            cmbPlanes.Location = new Point(100, 122);
+            cmbPlanes.Name = "cmbPlanes";
+            cmbPlanes.Size = new Size(116, 23);
+            cmbPlanes.TabIndex = 4;
+            cmbPlanes.SelectedIndexChanged += cmbPlanes_SelectedIndexChanged;
+            cmbPlanes.Click += cmbPlanes_Click;
             // 
             // cmbTurno
             // 
@@ -213,6 +213,7 @@
             // rbEfectivo
             // 
             rbEfectivo.AutoSize = true;
+            rbEfectivo.Checked = true;
             rbEfectivo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             rbEfectivo.Location = new Point(10, 22);
             rbEfectivo.Name = "rbEfectivo";
@@ -231,7 +232,6 @@
             rbTarjeta.Name = "rbTarjeta";
             rbTarjeta.Size = new Size(76, 25);
             rbTarjeta.TabIndex = 1;
-            rbTarjeta.TabStop = true;
             rbTarjeta.Text = "Tarjeta";
             rbTarjeta.UseVisualStyleBackColor = true;
             rbTarjeta.CheckedChanged += rbTarjeta_CheckedChanged;
@@ -267,6 +267,7 @@
             btnLimpiar.TabIndex = 11;
             btnLimpiar.Text = "&Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // frmInscripción
             // 
@@ -283,7 +284,7 @@
             Controls.Add(txtNom);
             Controls.Add(txtEdad);
             Controls.Add(cmbTurno);
-            Controls.Add(cmbPlane);
+            Controls.Add(cmbPlanes);
             Controls.Add(lblPago);
             Controls.Add(lblMeses);
             Controls.Add(lblTurno);
@@ -312,7 +313,7 @@
         private Label lblTurno;
         private Label lblMeses;
         private Label lblPago;
-        private ComboBox cmbPlane;
+        private ComboBox cmbPlanes;
         private ComboBox cmbTurno;
         private TextBox txtEdad;
         private TextBox txtNom;

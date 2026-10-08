@@ -29,9 +29,9 @@ namespace pryPabloGerbaudoActGym
         {
             InitializeComponent();
 
-            cmbPlane.Items.Add("Musculación");
-            cmbPlane.Items.Add("Funcional");
-            cmbPlane.Items.Add("Natación");
+            cmbPlanes.Items.Add("Musculación");
+            cmbPlanes.Items.Add("Funcional");
+            cmbPlanes.Items.Add("Natación");
 
             cmbTurno.Items.Add("Mañana");
             cmbTurno.Items.Add("Tarde");
@@ -74,11 +74,11 @@ namespace pryPabloGerbaudoActGym
             if (txtEdad.Text != "")
             {
                 Edad = Convert.ToInt32(edad);
-                cmbPlane.Enabled = true;
+                cmbPlanes.Enabled = true;
             }
             else
             {
-                cmbPlane.Enabled = false;
+                cmbPlanes.Enabled = false;
             }
 
 
@@ -86,9 +86,9 @@ namespace pryPabloGerbaudoActGym
 
         private void txtEdad_Click_1(object sender, EventArgs e)
         {
-            
+
         }
-        private void cmbPlane_Click(object sender, EventArgs e)
+        private void cmbPlanes_Click(object sender, EventArgs e)
         {
             if (Edad < 18)
             {
@@ -96,7 +96,7 @@ namespace pryPabloGerbaudoActGym
                 if (Edad <= 14)
                 {
                     MessageBox.Show("Los menores de 14 años no pueden inscribirse.");
-                    cmbPlane.Enabled = false;
+                    cmbPlanes.Enabled = false;
                 }
             }
             else
@@ -115,10 +115,10 @@ namespace pryPabloGerbaudoActGym
             }
         }
 
-        private void cmbPlane_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbPlanes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            planes = cmbPlane.Text;
-            if (cmbPlane.SelectedIndex != -1)
+            planes = cmbPlanes.Text;
+            if (cmbPlanes.SelectedIndex != -1)
             {
                 cmbTurno.Enabled = true;
             }
@@ -148,6 +148,10 @@ namespace pryPabloGerbaudoActGym
             if (txtMeses.Text != "")
             {
                 Meses = Convert.ToInt32(meses);
+                if (Meses > 12)
+                {
+                    MessageBox.Show("No se puede ingresar más de 12 meses");
+                }
             }
 
             if (txtNom.Text != "")
@@ -259,12 +263,12 @@ namespace pryPabloGerbaudoActGym
                     break;
             }
 
-            if (pago == "Efectivo")
+            if (rbEfectivo.Checked == true)
             {
                 Desc_Pago = (SubTotal * DESCUENTO_EFECTIVO);
                 Total = SubTotal - Desc_Pago;
             }
-            else if (pago == "Tarjeta")
+            else if (rbTarjeta.Checked == true)
             {
                 switch (cmbPago.SelectedItem)
                 {
@@ -279,10 +283,26 @@ namespace pryPabloGerbaudoActGym
                 }
             }
             MessageBox.Show("El total a pagar es: " + Total);
+            btnLimpiar.Enabled = true;
 
         }
 
-        
-        
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNom.Clear();
+            txtEdad.Clear();
+            txtMeses.Clear();
+            cmbPlanes.SelectedIndex = 0;
+            cmbTurno.SelectedIndex = 0;
+            cmbPago.SelectedIndex = -1;
+            rbEfectivo.Checked = true;
+            Edad = 0;
+            Meses = 0;
+            Total = 0;
+            SubTotal = 0;
+            Desc_Edad = 0;
+            Desc_Pago = 0;
+            Recargo_Pago = 0;
+        }
     }
 }
