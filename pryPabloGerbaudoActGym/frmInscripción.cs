@@ -84,6 +84,8 @@ namespace pryPabloGerbaudoActGym
             Desc_Edad = 0;
             Desc_Pago = 0;
             Recargo_Pago = 0;
+            estudiante = "";
+            casillero = "";
 
         }
         
@@ -299,18 +301,18 @@ namespace pryPabloGerbaudoActGym
             {
                 case "menor":
                     Desc_Edad = (SubTotal * DESCUENTO_MENOR);
-                    SubTotal = SubTotal - Desc_Edad;
+                    Total = SubTotal - Desc_Edad;
                     break;
                 case "mayor":
                     Desc_Edad = (SubTotal * DESCUENTO_MAYOR);
-                    SubTotal = SubTotal - Desc_Edad;
+                    Total = SubTotal - Desc_Edad;
                     break;
                 default:
                     if (chkEstudiante.Checked == true)
                     {
                         estudiante = "SI";
                         Desc_Edad = (SubTotal * DESCUENTO_ESTUDIANTE);
-                        SubTotal = SubTotal - Desc_Edad;
+                        Total = SubTotal - Desc_Edad;
                     }
                     else
                     {
@@ -321,8 +323,8 @@ namespace pryPabloGerbaudoActGym
 
             if (rbEfectivo.Checked == true)
             {
-                Desc_Pago = (SubTotal * DESCUENTO_EFECTIVO);
-                Total = SubTotal - Desc_Pago;
+                Desc_Pago = (Total * DESCUENTO_EFECTIVO);
+                Total = Total - Desc_Pago;
                 pago = "Efectivo";
             }
             else if (rbTarjeta.Checked == true)
@@ -331,16 +333,18 @@ namespace pryPabloGerbaudoActGym
                 switch (cmbPago.SelectedItem)
                 {
                     case 3:
-                        Recargo_Pago = (SubTotal * RECARGO_CUOTA3);
-                        Total = SubTotal + Recargo_Pago;
+                        Recargo_Pago = (Total * RECARGO_CUOTA3);
+                        Total = Total + Recargo_Pago;
                         break;
                     case 6:
-                        Recargo_Pago = (SubTotal * RECARGO_CUOTA6);
-                        Total = SubTotal + Recargo_Pago;
+                        Recargo_Pago = (Total * RECARGO_CUOTA6);
+                        Total = Total + Recargo_Pago;
                         break;
                 }
             }
-            NuevoSocio.nom = nom;
+
+            
+            NuevoSocio.nom  = nom; 
             NuevoSocio.Edad = Edad;
             NuevoSocio.estudiante = estudiante;
             NuevoSocio.planes = planes;
@@ -349,11 +353,14 @@ namespace pryPabloGerbaudoActGym
             NuevoSocio.casillero = casillero;
             NuevoSocio.total = Total;
             MessageBox.Show("El total a pagar es: " + Total);
-            mensaje = "DETALLE DE INSCRIPCIÓN" + "\nNombre: " + nom + "\nEdad: " + Edad + "\nEstudiante: " + estudiante + "\nPlan: " + planes + "\nTurno: " + turno + "\nMeses: " + meses + "\nCasillero: " + casillero + "\nForma de pago: " + pago + "\nCoutas: " + Cuotas + "\nTotal: " + Total;
+            mensaje = "DETALLE DE INSCRIPCIÓN" + "\nNombre: " + nom + "\nEdad: " + Edad + "\nEstudiante: " + estudiante + "\nPlan: " + planes + "\nTurno: " + turno + "\nMeses: " + meses + "\nCasillero: " + casillero + "\nForma de pago: " + pago + "\nCuotas: " + Cuotas + "\nSubTotal: " + SubTotal + "\nTotal: " + Total;
             MessageBox.Show(mensaje);
             btnCalcular.Enabled = false;
             btnLimpiar.Enabled = true;
-            //StreamWriter mensaje = new StreamWriter(Socios);
+            StreamWriter Socios = new StreamWriter("Socios.txt",true);
+            Socios.WriteLine(mensaje);
+            Socios.Close();
+
 
         }
 
