@@ -23,9 +23,23 @@ namespace pryPabloGerbaudoActGym
         const decimal DESCUENTO_EFECTIVO = 0.10m;
         const decimal RECARGO_CUOTA3 = 0.10m;
         const decimal RECARGO_CUOTA6 = 0.30m;
-        string nom, edad, planes, turno, meses, pago;
-        int Edad, Meses;
+        string nom, edad, planes, turno, meses, pago, estudiante, casillero, mensaje;
+        string Socios = "Socios.txt";
+        int Edad, Meses, Cuotas;
         decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago;
+        SOCIO NuevoSocio = new SOCIO();
+        public struct SOCIO
+        {
+            public string nom;
+            public int Edad;
+            public string estudiante;
+            public string planes;
+            public string turno;
+            public int Meses;
+            public string casillero;
+            public string pago;
+            public decimal total;
+        }
 
 
         public frmInscripción()
@@ -54,12 +68,14 @@ namespace pryPabloGerbaudoActGym
             txtMeses.Text = "1";
             cmbPlanes.SelectedIndex = 0;
             cmbTurno.SelectedIndex = 0;
-            cmbPago.SelectedIndex = -1;
+            cmbTurno.Enabled = false;
+            cmbPago.SelectedIndex = 0;
             chkCasillero.Checked = false;
             chkEstudiante.Checked = false;
             rbEfectivo.Checked = true;
             rbTarjeta.Checked = false;
             btnCalcular.Enabled = false;
+            txtMeses.Enabled = false;
             txtNom.Focus();
             Edad = 0;
             Meses = 0;
@@ -70,7 +86,8 @@ namespace pryPabloGerbaudoActGym
             Recargo_Pago = 0;
 
         }
-        private void frmInscripción_Load(object sender, EventArgs e)
+        
+        private void frmInscripción_Load_1(object sender, EventArgs e)
         {
             EstadoInicial();
         }
@@ -216,15 +233,15 @@ namespace pryPabloGerbaudoActGym
         }
         private void rbEfectivo_CheckedChanged(object sender, EventArgs e)
         {
-            pago = "Efectivo";
+            
         }
 
         private void rbTarjeta_CheckedChanged(object sender, EventArgs e)
         {
-            pago = "Tarjeta";
             if (rbTarjeta.Checked == true)
             {
                 cmbPago.Enabled = true;
+                pago = "Tarjeta";
             }
             else
             {
@@ -234,7 +251,7 @@ namespace pryPabloGerbaudoActGym
 
         private void cmbPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Cuotas = cmbPago.SelectedIndex;
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -245,10 +262,12 @@ namespace pryPabloGerbaudoActGym
 
                     if (chkCasillero.Checked == true)
                     {
+                        casillero = "SI";
                         SubTotal = SubTotal + (MUSCULACION + CASILLERO) * Meses;
                     }
                     else
                     {
+                        casillero = "NO";
                         SubTotal = SubTotal + (MUSCULACION * Meses);
                     }
                     break;
@@ -259,6 +278,7 @@ namespace pryPabloGerbaudoActGym
                     }
                     else
                     {
+                        casillero = "NO";
                         SubTotal = SubTotal + (FUNCIONAL * Meses);
                     }
 
@@ -270,6 +290,7 @@ namespace pryPabloGerbaudoActGym
                     }
                     else
                     {
+                        casillero = "NO";
                         SubTotal = SubTotal + (NATACION * Meses);
                     }
                     break;
@@ -287,8 +308,13 @@ namespace pryPabloGerbaudoActGym
                 default:
                     if (chkEstudiante.Checked == true)
                     {
+                        estudiante = "SI";
                         Desc_Edad = (SubTotal * DESCUENTO_ESTUDIANTE);
                         SubTotal = SubTotal - Desc_Edad;
+                    }
+                    else
+                    {
+                        estudiante = "NO";
                     }
                     break;
             }
@@ -297,9 +323,11 @@ namespace pryPabloGerbaudoActGym
             {
                 Desc_Pago = (SubTotal * DESCUENTO_EFECTIVO);
                 Total = SubTotal - Desc_Pago;
+                pago = "Efectivo";
             }
             else if (rbTarjeta.Checked == true)
             {
+                pago = "Tarjeta";
                 switch (cmbPago.SelectedItem)
                 {
                     case 3:
@@ -312,8 +340,20 @@ namespace pryPabloGerbaudoActGym
                         break;
                 }
             }
+            NuevoSocio.nom = nom;
+            NuevoSocio.Edad = Edad;
+            NuevoSocio.estudiante = estudiante;
+            NuevoSocio.planes = planes;
+            NuevoSocio.turno = turno;
+            NuevoSocio.Meses = Meses;
+            NuevoSocio.casillero = casillero;
+            NuevoSocio.total = Total;
             MessageBox.Show("El total a pagar es: " + Total);
+            mensaje = "DETALLE DE INSCRIPCIÓN" + "\nNombre: " + nom + "\nEdad: " + Edad + "\nEstudiante: " + estudiante + "\nPlan: " + planes + "\nTurno: " + turno + "\nMeses: " + meses + "\nCasillero: " + casillero + "\nForma de pago: " + pago + "\nCoutas: " + Cuotas + "\nTotal: " + Total;
+            MessageBox.Show(mensaje);
+            btnCalcular.Enabled = false;
             btnLimpiar.Enabled = true;
+            //StreamWriter mensaje = new StreamWriter(Socios);
 
         }
 
@@ -322,6 +362,5 @@ namespace pryPabloGerbaudoActGym
             EstadoInicial();
         }
 
-       
     }
 }

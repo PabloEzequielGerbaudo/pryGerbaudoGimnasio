@@ -298,6 +298,7 @@
             Name = "frmInscripción";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gimnasio Siglo-Inscripción";
+            Load += frmInscripción_Load_1;
             grpPago.ResumeLayout(false);
             grpPago.PerformLayout();
             ResumeLayout(false);
