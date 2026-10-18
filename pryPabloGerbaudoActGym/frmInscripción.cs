@@ -22,11 +22,11 @@ namespace pryPabloGerbaudoActGym
         const decimal DESCUENTO_ESTUDIANTE = 0.15m;
         const decimal DESCUENTO_EFECTIVO = 0.10m;
         const decimal RECARGO_CUOTA3 = 0.10m;
-        const decimal RECARGO_CUOTA6 = 0.30m;
+        const decimal RECARGO_CUOTA6 = 0.20m;
         string nom, edad, planes, turno, meses, pago, estudiante, casillero, mensaje;
         string Socios = "Socios.txt";
         int Edad, Meses, Cuotas;
-        decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago;
+        decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago, Desc;
         SOCIO NuevoSocio = new SOCIO();
         public struct SOCIO
         {
@@ -38,6 +38,7 @@ namespace pryPabloGerbaudoActGym
             public int Meses;
             public string casillero;
             public string pago;
+            public decimal Desc;
             public decimal total;
         }
 
@@ -84,16 +85,17 @@ namespace pryPabloGerbaudoActGym
             Desc_Edad = 0;
             Desc_Pago = 0;
             Recargo_Pago = 0;
+            Desc = 0;
             estudiante = "";
             casillero = "";
 
         }
-        
+
         private void frmInscripción_Load_1(object sender, EventArgs e)
         {
             EstadoInicial();
         }
-        private void txtNom_TextChanged(object sender, EventArgs e)
+        private void txtNom_TextChanged_1(object sender, EventArgs e)
         {
             nom = txtNom.Text;
             if (txtNom.Text != "")
@@ -106,14 +108,14 @@ namespace pryPabloGerbaudoActGym
             }
 
         }
-        private void txtNom_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtNom_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
-        private void txtEdad_TextChanged(object sender, EventArgs e)
+        private void txtEdad_TextChanged_1(object sender, EventArgs e)
         {
 
             edad = txtEdad.Text;
@@ -129,22 +131,18 @@ namespace pryPabloGerbaudoActGym
 
 
         }
-
-        private void txtEdad_Click_1(object sender, EventArgs e)
-        {
-
-        }
-        private void cmbPlanes_Click(object sender, EventArgs e)
+        private void txtEdad_Leave(object sender, EventArgs e)
         {
             if (Edad < 18)
             {
                 edad = "menor";
                 if (Edad <= 14)
                 {
-                    MessageBox.Show("Los menores de 14 años no pueden inscribirse.");
+                    MessageBox.Show("Los menores de 14 años no pueden inscribirse.", "Edad Mínima",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cmbPlanes.Enabled = false;
                     txtEdad.Clear();
-                    txtEdad.Focus();
+                    btnLimpiar.Enabled = true;
 
                 }
             }
@@ -156,6 +154,18 @@ namespace pryPabloGerbaudoActGym
                 }
             }
         }
+        private void chkEstudiante_Leave(object sender, EventArgs e)
+        {
+            if (chkEstudiante.Checked == true)
+            {
+                estudiante = "SI";
+            }
+            else
+            {
+                estudiante = "NO";
+            }
+        }
+
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -199,7 +209,10 @@ namespace pryPabloGerbaudoActGym
                 Meses = Convert.ToInt32(meses);
                 if (Meses > 12)
                 {
-                    MessageBox.Show("No se puede ingresar más de 12 meses");
+                    MessageBox.Show("No se puede ingresar más de 12 meses", "Máximo de Meses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtMeses.Clear();
+                    txtMeses.Focus();
                 }
             }
 
@@ -233,10 +246,6 @@ namespace pryPabloGerbaudoActGym
                 e.Handled = true;
             }
         }
-        private void rbEfectivo_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         private void rbTarjeta_CheckedChanged(object sender, EventArgs e)
         {
@@ -253,7 +262,7 @@ namespace pryPabloGerbaudoActGym
 
         private void cmbPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Cuotas = cmbPago.SelectedIndex;
+
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -276,6 +285,7 @@ namespace pryPabloGerbaudoActGym
                 case "Funcional":
                     if (chkCasillero.Checked == true)
                     {
+                        casillero = "SI";
                         SubTotal = SubTotal + (FUNCIONAL + CASILLERO) * Meses;
                     }
                     else
@@ -288,6 +298,7 @@ namespace pryPabloGerbaudoActGym
                 case "Natación":
                     if (chkCasillero.Checked == true)
                     {
+                        casillero = "SI";
                         SubTotal = SubTotal + (NATACION + CASILLERO) * Meses;
                     }
                     else
@@ -297,34 +308,34 @@ namespace pryPabloGerbaudoActGym
                     }
                     break;
             }
+            Total = SubTotal;
             switch (edad)
             {
                 case "menor":
-                    Desc_Edad = (SubTotal * DESCUENTO_MENOR);
-                    Total = SubTotal - Desc_Edad;
+                    Desc_Edad = (Total * DESCUENTO_MENOR);
+                    Total = Total - Desc_Edad;
+                    Desc = DESCUENTO_MENOR * 100;
                     break;
                 case "mayor":
-                    Desc_Edad = (SubTotal * DESCUENTO_MAYOR);
-                    Total = SubTotal - Desc_Edad;
+                    Desc_Edad = (Total * DESCUENTO_MAYOR);
+                    Total = Total - Desc_Edad;
+                    Desc = DESCUENTO_MAYOR * 100;
                     break;
                 default:
                     if (chkEstudiante.Checked == true)
                     {
-                        estudiante = "SI";
-                        Desc_Edad = (SubTotal * DESCUENTO_ESTUDIANTE);
-                        Total = SubTotal - Desc_Edad;
-                    }
-                    else
-                    {
-                        estudiante = "NO";
+                        Desc_Edad = (Total * DESCUENTO_ESTUDIANTE);
+                        Total = Total - Desc_Edad;
+                        Desc = DESCUENTO_ESTUDIANTE * 100;
                     }
                     break;
             }
-
+        
             if (rbEfectivo.Checked == true)
             {
                 Desc_Pago = (Total * DESCUENTO_EFECTIVO);
                 Total = Total - Desc_Pago;
+                Desc = Desc + (DESCUENTO_EFECTIVO * 100);
                 pago = "Efectivo";
             }
             else if (rbTarjeta.Checked == true)
@@ -332,42 +343,71 @@ namespace pryPabloGerbaudoActGym
                 pago = "Tarjeta";
                 switch (cmbPago.SelectedItem)
                 {
+                    case 1:
+                        Cuotas = 1;
+                        break;
                     case 3:
+                        Cuotas = 3;
                         Recargo_Pago = (Total * RECARGO_CUOTA3);
                         Total = Total + Recargo_Pago;
                         break;
                     case 6:
+                        Cuotas = 6;
                         Recargo_Pago = (Total * RECARGO_CUOTA6);
                         Total = Total + Recargo_Pago;
                         break;
                 }
             }
-
-            
-            NuevoSocio.nom  = nom; 
+            NuevoSocio.nom = nom;
             NuevoSocio.Edad = Edad;
             NuevoSocio.estudiante = estudiante;
             NuevoSocio.planes = planes;
             NuevoSocio.turno = turno;
             NuevoSocio.Meses = Meses;
             NuevoSocio.casillero = casillero;
+            NuevoSocio.pago = pago;
+            NuevoSocio.Desc = Desc;
             NuevoSocio.total = Total;
-            MessageBox.Show("El total a pagar es: " + Total);
-            mensaje = "DETALLE DE INSCRIPCIÓN" + "\nNombre: " + nom + "\nEdad: " + Edad + "\nEstudiante: " + estudiante + "\nPlan: " + planes + "\nTurno: " + turno + "\nMeses: " + meses + "\nCasillero: " + casillero + "\nForma de pago: " + pago + "\nCuotas: " + Cuotas + "\nSubTotal: " + SubTotal + "\nTotal: " + Total;
-            MessageBox.Show(mensaje);
-            btnCalcular.Enabled = false;
-            btnLimpiar.Enabled = true;
-            StreamWriter Socios = new StreamWriter("Socios.txt",true);
+            MessageBox.Show("El total a pagar es: $" + Math.Truncate(Total), "Total de la Inscripción");
+            mensaje = "Nombre: " + nom + "\nEdad: " + Edad + "\nEstudiante: " + estudiante + "\nPlan: " + planes + "\nTurno: " + turno + "\nMeses: " + meses + "\nCasillero: " + casillero + "\nForma de pago: " + pago + "\nCuotas: " + Cuotas + "\nSubTotal: $" + Math.Truncate(SubTotal) + "\nDescuento: " + Math.Truncate(Desc) + "%" + "\nTotal: $" + Math.Truncate(Total) + "\n---------------------------------------------------";
+            MessageBox.Show(mensaje, "Detalle de Inscripción");
+            lstSocios.Items.Add(mensaje);
+            StreamWriter Socios = new StreamWriter("Socios.txt", true);
             Socios.WriteLine(mensaje);
             Socios.Close();
+            btnCalcular.Enabled = false;
+            EstadoInicial();
+            btnLimpiar.Enabled = true;
 
-
+        
         }
 
+       
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            EstadoInicial();
+           EstadoInicial();
+        }
+        private void lstSocios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstSocios.SelectedItem != null)
+            {
+                btnConsultar.Enabled = true;
+            }
+            else
+            {
+                btnConsultar.Enabled = false;
+            }
+        }
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(lstSocios.SelectedItem.ToString(), "Detalle de Inscripción");
         }
 
+        private void grpPago_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }
