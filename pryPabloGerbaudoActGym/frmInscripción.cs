@@ -25,8 +25,11 @@ namespace pryPabloGerbaudoActGym
         const decimal RECARGO_CUOTA6 = 0.20m;
         string nom, edad, planes, turno, meses, pago, estudiante, casillero, mensaje;
         string Socios = "Socios.txt";
-        int Edad, Meses, Cuotas;
+        int Edad, Meses, Cuotas,Nro_socios,indice;
         decimal Total, SubTotal, Desc_Edad, Recargo_Pago, Desc_Pago, Desc;
+        string [] socios = new string[5];
+        string[] infoSocios = new string[5];
+
         SOCIO NuevoSocio = new SOCIO();
         public struct SOCIO
         {
@@ -86,6 +89,7 @@ namespace pryPabloGerbaudoActGym
             Desc_Pago = 0;
             Recargo_Pago = 0;
             Desc = 0;
+            indice = 0;
             estudiante = "";
             casillero = "";
 
@@ -370,16 +374,28 @@ namespace pryPabloGerbaudoActGym
             NuevoSocio.total = Total;
             MessageBox.Show("El total a pagar es: $" + Math.Truncate(Total), "Total de la Inscripción");
             mensaje = "Nombre: " + nom + "\nEdad: " + Edad + "\nEstudiante: " + estudiante + "\nPlan: " + planes + "\nTurno: " + turno + "\nMeses: " + meses + "\nCasillero: " + casillero + "\nForma de pago: " + pago + "\nCuotas: " + Cuotas + "\nSubTotal: $" + Math.Truncate(SubTotal) + "\nDescuento: " + Math.Truncate(Desc) + "%" + "\nTotal: $" + Math.Truncate(Total) + "\n---------------------------------------------------";
-            MessageBox.Show(mensaje, "Detalle de Inscripción");
-            lstSocios.Items.Add(mensaje);
+            MessageBox.Show(mensaje, "Detalle de Inscripción", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            EstadoInicial();
+            btnLimpiar.Enabled = true;
+            if (indice < socios.Length)
+            {
+                socios[indice] = NuevoSocio.nom;
+                lstSocios.Items.Add(NuevoSocio.nom);
+                if (indice < infoSocios.Length)
+                {
+                    infoSocios[indice] = mensaje;
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Se ha alcanzado el límite de socios registrados.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            indice = indice + 1;
             StreamWriter Socios = new StreamWriter("Socios.txt", true);
             Socios.WriteLine(mensaje);
             Socios.Close();
             btnCalcular.Enabled = false;
-            EstadoInicial();
-            btnLimpiar.Enabled = true;
-
-        
         }
 
        
@@ -400,7 +416,16 @@ namespace pryPabloGerbaudoActGym
         }
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(lstSocios.SelectedItem.ToString(), "Detalle de Inscripción");
+            Nro_socios = lstSocios.SelectedIndex;
+            for (int indice = 0; indice < socios.Length; indice++)
+            {
+                if (Nro_socios == indice)
+                {
+                    MessageBox.Show(infoSocios[indice], "Detalle de Inscripción");
+                        
+                    
+                }
+            }
         }
 
         private void grpPago_Enter(object sender, EventArgs e)
