@@ -426,7 +426,6 @@ namespace pryPabloGerbaudoActGym
                 {
                     indice = indice + 1;
                 }
-                break;
             }
         }
 
