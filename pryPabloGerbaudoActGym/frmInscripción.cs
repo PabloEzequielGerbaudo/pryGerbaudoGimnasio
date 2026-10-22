@@ -89,7 +89,7 @@ namespace pryPabloGerbaudoActGym
             Desc_Pago = 0;
             Recargo_Pago = 0;
             Desc = 0;
-            indice = 0;
+            Nro_socios = 0;
             estudiante = "";
             casillero = "";
 
@@ -385,13 +385,12 @@ namespace pryPabloGerbaudoActGym
                 {
                     infoSocios[indice] = mensaje;
                 }
-                
+                indice = indice + 1;
             }
             else
             {
                 MessageBox.Show("Se ha alcanzado el límite de socios registrados.", "Límite alcanzado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            indice = indice + 1;
             StreamWriter Socios = new StreamWriter("Socios.txt", true);
             Socios.WriteLine(mensaje);
             Socios.Close();
@@ -417,14 +416,17 @@ namespace pryPabloGerbaudoActGym
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             Nro_socios = lstSocios.SelectedIndex;
-            for (int indice = 0; indice < socios.Length; indice++)
+            for (int indice = 0; indice < socios.Length;)
             {
                 if (Nro_socios == indice)
                 {
                     MessageBox.Show(infoSocios[indice], "Detalle de Inscripción");
-                        
-                    
                 }
+                else
+                {
+                    indice = indice + 1;
+                }
+                break;
             }
         }
 
